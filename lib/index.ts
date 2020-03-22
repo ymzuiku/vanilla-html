@@ -35,10 +35,16 @@ const html = <T extends HTMLElement>(
     const attrs = Object.keys(node.props);
     attrs.forEach(name => {
       const value = node.props[name];
-      if (name === "style" && typeof value === "object") {
-        Object.keys(value).forEach(styName => {
-          ele.style[styName] = value[styName];
-        });
+      if (name === "style") {
+        if (typeof value === 'string') {
+          ele.setAttribute(name, value);
+        } else if (typeof value === "object") {
+          Object.keys(value).forEach(styName => {
+            ele.style[styName] = value[styName];
+          });
+        } else if (typeof value === 'function') {
+          value(ele);
+        }
       } else if (typeof value === "function" || typeof value === "object") {
         ele[name] = value;
       } else if (name === "ref") {
