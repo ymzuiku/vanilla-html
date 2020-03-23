@@ -8,17 +8,17 @@ Create Elements like JSX:
 import html from "vanilla-html";
 
 const { gourp } = html`
-  <div ref="group">
+  <div ref=group>
     <div>hello group</div>
     <div>sub group</div>
   </div>
 `;
 
 const { root, btn } = html`
-  <div ref="root">
+  <div ref=root>
     <h1>hello</h1>
     ${group}
-    <button ref="btn" onclick=${() => console.log("hello")}></button>
+    <button ref=btn onclick=${() => console.log("hello")}></button>
   </div>
 `;
 
