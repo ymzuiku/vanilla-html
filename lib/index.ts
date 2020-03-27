@@ -29,6 +29,9 @@ const html = <T extends HTMLElement>(
     if (isElement(node)) {
       return node;
     }
+    if (!node) {
+      return document.createElement('div');
+    }
     const ele = document.createElement(node.tag);
 
     // set props
@@ -36,13 +39,13 @@ const html = <T extends HTMLElement>(
     attrs.forEach(name => {
       const value = node.props[name];
       if (name === "style") {
-        if (typeof value === 'string') {
+        if (typeof value === "string") {
           ele.setAttribute(name, value);
         } else if (typeof value === "object") {
           Object.keys(value).forEach(styName => {
             ele.style[styName] = value[styName];
           });
-        } else if (typeof value === 'function') {
+        } else if (typeof value === "function") {
           value(ele);
         }
       } else if (typeof value === "function" || typeof value === "object") {
@@ -58,9 +61,11 @@ const html = <T extends HTMLElement>(
     node.children.forEach((child: any) => {
       if (Object.prototype.toString.call(child) === "[object Array]") {
         child.forEach((c: any) => {
-          const subChildEle = addTree(c);
-          if (subChildEle) {
-            ele.appendChild(subChildEle);
+          if (c) {
+            const subChildEle = addTree(c);
+            if (subChildEle) {
+              ele.appendChild(subChildEle);
+            }
           }
         });
       } else if (isElement(child)) {
