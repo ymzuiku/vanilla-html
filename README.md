@@ -1,29 +1,23 @@
 # vanilla-html
 
-## Example:
-
-Create Elements like JSX:
+Onliy use string build template innerHTML
 
 ```js
-import html from "vanilla-html";
+import { html } from "vanilla-html";
 
-const { gourp } = html`
-  <div ref=group>
-    <div>hello group</div>
-    <div>sub group</div>
-  </div>
-`;
+export const App = () => {
+  const div = html`
+    <div>
+      <button class="btn">Click Me</button>
+    </div>
+  `;
 
-const { root, btn } = html`
-  <div ref=root>
-    <h1>hello</h1>
-    ${group}
-    <button ref=btn onclick=${() => console.log("hello")}></button>
-  </div>
-`;
+  const btn = div.querySelector < HTMLButtonElement > "button";
+  btn.onclick = () => {
+    btn.innerHTML += "1";
+  };
+  return div;
+};
 
-console.log(root);
-console.log(btn);
-
-document.body.append(root);
+document.body.append(App());
 ```
