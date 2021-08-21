@@ -1,8 +1,8 @@
 # vanilla-html
 
-Onliy use string build template innerHTML
+Only use string build template innerHTML
 
-```js
+```ts
 import { html } from "vanilla-html";
 
 export const App = () => {
