@@ -7,11 +7,7 @@ export const templateFn = function (...args: any[]): string {
     str.forEach((v: string, i: number) => {
       out += v;
       if (rest[i]) {
-        if (Array.isArray(rest[i])) {
-          out += rest[i].join("");
-        } else {
-          out += rest[i];
-        }
+        out += rest[i];
       }
     });
 
